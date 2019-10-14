@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Computed</title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="count--">Decrementa</button>
+        <button @click="count++">Incrementa</button>
+        <button @click="countTwo++">Incrementa o Count Two</button>
+        <p>{{ countTwo }}</p>
+        <p>{{ count }}</p>
+        <p>{{ verificaComputed }}</p>
+        <p>{{ verificaMethod() }}</p>
+    </div>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                count: 0,
+                countTwo: 0
+            },
+            computed: {
+                verificaComputed: function() {
+                    console.log('computed');
+                    return this.count < 5 ? 'Menor que 5' : 'Maior igual a 5';
+                }
+            },
+            methods: {
+                verificaMethod: function() {
+                    console.log('method');
+                    return this.count < 5 ? 'Menor que 5' : 'Maior igual a 5';
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
