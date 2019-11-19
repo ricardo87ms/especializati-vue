@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title>Jogo 21 Vue JS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+
+        <link rel="stylesheet" href="css/style.css">
+
+        <link rel="shortcut icon" href="assets/favicon.png" type="image/png">
+    </head>
+    <body>
+        <div class="container text-center" id="app">
+            <h1 class="title">Jogo do 21 com Vue JS</h1>
+
+            <div class="row">
+                <div :class="['col-6', jogador == 1 ? 'active' : '']">
+                    <img src="assets/player1.png" alt="Jogador 1" >
+                    <p>
+                        Player 1
+                        <span class="badge badge-default">{{jogadasJogador1}}</span>
+                    </p>
+                    <p>Pontos: {{this.jogador1.pontos}}</p>
+                    <p v-if="this.ganhador == 1" class="ganhador">Jogador Ganhador!</p>
+                </div>
+                <div :class="['col-6', jogador == 2 ? 'active' : '']">
+                    <img src="assets/player2.png" alt="Jogador 2">
+                    <p>
+                        Player 2
+                        <span class="badge badge-default">{{jogadasJogador2}}</span>
+                    </p>
+                    <p>Pontos: {{this.jogador2.pontos}}</p>
+                    <p v-if="this.ganhador == 2" class="ganhador">Jogador Ganhador!</p>
+                </div>
+
+                <div class="controls col">
+                    <a href="#" class="btn btn-success" @click.prevent="pular">Pular</a>
+                    <a href="#" class="btn btn-primary" @click.prevent="finalizarJogo">Finalizar Jogo</a>
+                    <a href="#" class="btn btn-danger" @click.prevent="resetar">Resetar</a>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-6">
+                    <a href="#" @click.prevent="viraCarta">
+                        <img src="assets/baralho-cartas.png" alt="Baralho" class="carts">
+                    </a>
+                </div>
+                <div v-if="carta != ''" class="col-6">
+                    <img :src="carta" alt="Carta" class="cart">
+                </div>
+            </div>
+        </div>
+
+        <script src="./vue.js"></script>
+        <script>
+            new Vue({
+                el: "#app",
+                data:{
+                    jogador: 1,
+                    jogador1: {
+                        pontos: 0,
+                        historico: []
+                    },
+                    jogador2: {
+                        pontos: 0,
+                        historico: []
+                    },
+                    carta: '',
+                    ganhador: 0
+                },
+                methods: {
+                    pular () {
+                        this.jogador = this.jogador == 1 ? 2 : 1;
+                        this.carta = '';
+                    },
+                    viraCarta(){
+                        let numero = Math.floor((Math.random() * 13) + 1);
+                        this.carta = `assets/carts/${numero}.png`;
+                        if(this.jogador === 1){
+                            this.jogador1.pontos += numero;
+                            if(this.jogador1.pontos > 21){
+                                this.finalizarJogo(true);
+                            }
+                            this.jogador1.historico.push(numero);
+                        }
+                        if(this.jogador === 2){
+                            this.jogador2.pontos += numero;
+                            if(this.jogador2.pontos > 21){
+                                this.finalizarJogo(true);
+                            }
+                            this.jogador2.historico.push(numero);
+                        }
+                    },
+                    finalizarJogo(maior21 = false){
+                        if(maior21 === true){
+                            this.ganhador = this.jogador == 1 ? 2 : 1;
+                        } else {
+                            this.ganhador = this.jogador1.pontos >= this.jogador2.pontos ? 1 : 2;
+                        }
+                        this.resetar();
+                        setTimeout(()=>{
+                            this.ganhador = 0;
+                        }, 5000);
+                    },
+                    resetar(){
+                        this.jogador = 1;
+                        this.jogador1.pontos = 0;
+                        this.jogador1.historico = [];
+                        this.jogador2.historico = [];
+                        this.jogador2.pontos = 0;
+                        this.carta = '';
+                    }
+                },
+                computed: {
+                    jogadasJogador1(){
+                        return this.jogador1.historico.length;
+                    },
+                    jogadasJogador2(){
+                        return this.jogador2.historico.length;
+                    }
+                },
+            });
+        </script>
+    </body>
+</html>
