@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventos Parâmetros</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" @keyup="changeInput" />
+      {{ count }}
+
+      <hr />
+      <input type="text" @keyup="changeInputDois(1)" />
+      <button @click="changeInputDois(2)">Incrementa Dois</button>
+      {{ countDois }}
+
+      <hr />
+      <input type="text" @keyup="changeInputTres(2, $event)" />
+      {{ countTres }}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          count: 0,
+          countDois: 0,
+          countTres: 0,
+        },
+        methods: {
+          changeInput: function (event) {
+            console.log(event.target.value);
+          },
+          changeInputDois: function (value) {
+            this.countDois += value;
+          },
+          changeInputTres(value, event) {
+            console.log(value);
+            console.log(event.target.value);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
