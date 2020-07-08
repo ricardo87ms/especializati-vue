@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <tasks-component :title="'Listagem de tarefas'" :items="['lavar', 'passar', 'cozinhar']"></tasks-component>
+    <tasks-component @chamandoPai="respondendoFilho" :title="'Listagem de tarefas'" :items="tasks"></tasks-component>
     <list-items-component :title="'Listagem'" :items="['lavar', 'passar', 'cozinhar']"></list-items-component>
   </div>
 </template>
@@ -11,9 +11,20 @@ import ListItemsComponent from "./components/ListItemsComponent.vue";
 
 export default {
   name: "App",
+  data() {
+    return {
+      tasks: ["lavar", "passar", "cozinhar"]
+    };
+  },
   components: {
     TasksComponent,
     ListItemsComponent
+  },
+  methods: {
+    respondendoFilho(task) {
+      alert("Respondendo Filho " + task);
+      this.tasks.push(task);
+    }
   }
 };
 </script>
