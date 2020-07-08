@@ -1,4 +1,4 @@
-# myproject
+# formulario-vue
 
 ## Project setup
 
@@ -30,10 +30,12 @@ npm run test
 npm run lint
 ```
 
-### Comandos utilizados
+### Comandos Utilizados
 
 ```
-vue create my-project
+vue create formulario-vue
+
+npm i vee-validate --save
 ```
 
 ### Customize configuration
