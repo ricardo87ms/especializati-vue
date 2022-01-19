@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data bind Vue 3</title>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ titulo }}</h1>
+    <h2>{{ subtitulo }}</h2>
+    <p>{{ isTrue ? 'Verdadeiro' : 'Falso' }}</p>
+    <a v-bind:href="urlSite" :title="tituloSite">{{ tituloSite }}</a>
+  </div>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const Bind = {
+      data() {
+        return {
+          titulo: 'Titulo',
+          subtitulo: 'Subtitulo',
+          isTrue: true,
+          urlSite: 'https://www.google.com',
+          tituloSite: 'Pesquisa do Google'
+        }
+      }
+    }
+
+    Vue.createApp(Bind).mount('#app');
+  </script>
+</body>
+</html>
