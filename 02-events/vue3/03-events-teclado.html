@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events Teclado Vue 3</title>
+</head>
+<body>
+  <div id="app">
+    <input
+        type="text"
+        @keyup="funcao"
+        @keyup.enter="funcaoDois"
+        @blur="funcaoTres"
+      />
+      {{ teclas }}
+  </div>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const Events = {
+      data() {
+        return {
+          teclas: ''
+        }
+      },
+      methods: {
+        funcao: function (event) {
+            this.teclas = event.keyCode;
+          },
+          funcaoDois: function () {
+            console.log('enter');
+          },
+          funcaoTres: function (event) {
+            console.log('blur');
+          }
+      }
+    }
+
+    Vue.createApp(Events).mount('#app');
+  </script>
+</body>
+</html>
