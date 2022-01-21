@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Styles Vue 3</title>
+  <style>
+    .active {
+      background-color: green;
+    }
+    .no-active {
+      background-color: red;
+    }
+    .default {
+      color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <button @click="ativo = !ativo">Ativar</button>
+
+    <p :class="{active : ativo}">Exemplo de estilos com Vue 1</p>
+
+    <p :class="ativo ? 'active' : 'no-active'">Exemplo de estilos com Vue 2</p>
+
+    <p class="default" :class="ativo ? 'active' : 'no-active'">Exemplo de estilos com Vue 3</p>
+
+    <p :class="['default', ativo ? 'active' : 'no-active']">Exemplo de estilos com Vue 3/2</p>
+
+    <p :class="classObject">Exemplo de estilos com Vue 4</p>
+
+    <p :style="{display: ['-webkit-flex', '-moz-flex', 'flex']}">Exemplo de estilos com Vue 5</p>
+
+    <p>{{ ativo }}</p>
+  </div>
+
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const Styles = {
+      data() {
+        return {
+          ativo: true,
+          classObject: {
+            active: true,
+            'text-red': false,
+            'color-white': false,
+          },
+        }
+      }
+    }
+
+    Vue.createApp(Styles).mount('#app');
+  </script>
+</body>
+</html>

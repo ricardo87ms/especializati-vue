@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watch Vue 3</title>
+</head>
+<body>
+  <div id="app">
+    <button @click="count++">Incrementa</button>
+    <p>{{ count }}</p>
+  </div>
+
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const Watch = {
+      data() {
+        return {
+          count: 0
+        }
+      },
+      watch: {
+        count: function (value) {
+          setTimeout(() => (this.count = 0), 3000);
+        },
+      }
+    }
+
+    Vue.createApp(Watch).mount('#app');
+  </script>
+</body>
+</html>
