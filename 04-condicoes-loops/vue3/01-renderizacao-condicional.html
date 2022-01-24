@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renderização Condicional Vue 3</title>
+</head>
+<body>
+  <div id="app">
+    <p>{{ ativo }}</p>
+
+    <div v-if="number >= 20">
+      exibe maior igual a 20
+    </div>
+
+    <hr>
+
+    <div v-if="ativo">
+      exibe se estiver Ativo
+    </div>
+    <div v-else>
+      exibe se estiver Inativo
+    </div>
+
+    <hr>
+
+    <div v-if="type === 'A'">
+      é A
+    </div>
+    <div v-else-if="type === 'B'">
+      é B
+    </div>
+    <div v-else-if="type === 'C'">
+      é C
+    </div>
+    <div v-else>
+      Não é A/B/C
+    </div>
+
+  </div>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const Render = {
+      data() {
+        return {
+          ativo: 1,
+          number:30,
+          type: 'E'
+        }
+      }
+    }
+
+    Vue.createApp(Render).mount('#app');
+  </script>
+</body>
+</html>
