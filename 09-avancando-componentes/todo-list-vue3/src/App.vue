@@ -1,15 +1,17 @@
 <template>
-  <h1>Teste</h1>
-<button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
-  Tooltip on top
-</button>
+  <div class="container">
+    <h1>Projeto de Listagem de Tarefas</h1>
+    <tarefas-component></tarefas-component>
+  </div>
 </template>
 
 <script>
+import TarefasComponent from './components/tarefas/TarefasComponent.vue'
 
 export default {
   name: 'App',
   components: {
+    TarefasComponent
   }
 }
 </script>
