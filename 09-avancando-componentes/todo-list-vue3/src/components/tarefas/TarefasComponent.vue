@@ -2,10 +2,17 @@
   <div>
     <h2>{{ title }}</h2>
 
-    <!-- <form class="form form-inline">
-      <input type="text" name="tarefa" id="tarefa" placeholder="Digite a tarefa" class="form-control">
-      <button cla>Enviar</button>
-    </form> -->
+    <form class="form form-inline" @submit.prevent="save">
+      <div class="form-group mb-2">
+        <input type="text"
+        name="tarefa"
+        id="tarefa"
+        placeholder="Digite a tarefa"
+        class="form-control"
+        v-model="tarefa.nome">
+      </div>
+      <button class="btn btn-primary" type="submit">Enviar</button>
+    </form>
 
     <table class="table">
       <thead>
@@ -34,13 +41,26 @@ export default {
     return {
       title: 'Listagem de Tarefas',
       tarefas: [
-        {id: 1, nome: 'Teste de tarefas'}
-      ]
+      ],
+      tarefa: {
+        id: '',
+        nome: ''
+      }
+    };
+  },
+  methods: {
+    save() {
+      this.tarefa.id = this.tarefas.length + 1;
+
+      this.tarefas.push(this.tarefa);
+
+      this.tarefa = {
+        id: '',
+        nome: ''
+      }
     }
   }
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
